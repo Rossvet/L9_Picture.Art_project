@@ -111,4 +111,4 @@ const modals = () => {
 
 
 
-export default modals();
+export default modals;
