@@ -938,8 +938,8 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider');
-  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
 });
 
 /***/ }),
@@ -1073,16 +1073,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var sliders = function sliders(slides, dir, prev, next) {
-  var slideIndex = 1;
+  var slideIndex = 1,
+      paused = false;
   var items = document.querySelectorAll(slides);
 
   function showSlides(n) {
-    if (n > slides.length) {
+    if (n > items.length) {
       slideIndex = 1;
     }
 
     if (n < 1) {
-      slideIndex = slides.length;
+      slideIndex = items.length;
     }
 
     items.forEach(function (item) {
@@ -1112,6 +1113,29 @@ var sliders = function sliders(slides, dir, prev, next) {
       items[slideIndex - 1].classList.add('slideInLeft');
     });
   } catch (e) {}
+
+  function activatedAnimation() {
+    if (dir === 'vertical') {
+      paused = setInterval(function () {
+        changeSlide(1);
+        items[slideIndex - 1].classList.add('slideInDown');
+      }, 3000);
+    } else {
+      paused = setInterval(function () {
+        changeSlide(1);
+        items[slideIndex - 1].classList.remove('slideInRight');
+        items[slideIndex - 1].classList.add('slideInLeft');
+      }, 3000);
+    }
+  }
+
+  activatedAnimation();
+  items[0].parentNode.addEventListener('mouseenter', function () {
+    clearInterval(paused);
+  });
+  items[0].parentNode.addEventListener('mouseleave', function () {
+    activatedAnimation();
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sliders);
