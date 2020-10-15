@@ -1078,6 +1078,7 @@ h4 {
   border-radius: 4px;
   transform: translateX(-50%) !important;
   padding: 4rem 6rem 5rem 6rem;
+
 }
 .popup-gift {
   z-index: 20;
@@ -1257,6 +1258,23 @@ h4 {
   border-radius: 4px;
   transform: translateX(-50%) !important;
   padding: 3rem 6rem 4rem 6rem;
+}
+
+.status {
+  text-align: center;
+  animation-name: statusAnimation;
+  animation-duration: 800ms;
+}
+
+@keyframes statusAnimation {
+  from {
+    margin-top: 0;
+    opacity: 0.1;
+  }
+  to {
+    margin-top: -210px;
+    opacity: 1;
+  }
 }
 @media (max-width: 1399px) {
   .paints {
